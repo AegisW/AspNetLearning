@@ -50,8 +50,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                         Text = u.Name,
                         Value = u.Id.ToString(),
                     }),
-        };
-            
+            };
 
             if (id == null || id == 0)
             {   
@@ -59,16 +58,15 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             else
             {
-                // Update product
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
+                return View(productVM);
             }
-
-            return View(productVM);
         }
 
         //Post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ProductVM obj, IFormFile file)
+        public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -79,6 +77,15 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     var uploads = Path.Combine(wwwRootPath, @"images\products");
                     var extension = Path.GetExtension(file.FileName);
 
+                    if (obj.Product.ImageUrl != null)
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -86,7 +93,15 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                     obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
                 }
 
-                _unitOfWork.Product.Add(obj.Product);
+                if (obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
+
                 _unitOfWork.Save();
                 TempData["Success"] = "Product created successfully";
                 return RedirectToAction("Index");
@@ -95,48 +110,33 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             return View(obj);
         }
 
-        //Get
-        public IActionResult Delete(int? id)
+        #region API Calls
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var productFromDb = _unitOfWork.Product.GetFirstOrDefault(c => c.Id == id);
-
-            if (productFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(productFromDb);
+            var productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
+            return Json(new { data = productList });
         }
 
-        //Post
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeletePost(int? id)
+        [HttpDelete]
+        public IActionResult Delete(int? id)
         {
             var obj = _unitOfWork.Product.GetFirstOrDefault(c => c.Id == id);
 
             if (obj == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
+            var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+            
             _unitOfWork.Product.Remove(obj);
             _unitOfWork.Save();
-            TempData["Success"] = "Product deleted successfully";
-            return RedirectToAction("Index");
-        }
-
-        #region API Calls
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var productList = _unitOfWork.Product.GetAll();
-            return Json(new { data = productList });
+            return Json(new { success = true, message = "Delete successful" });
         }
         #endregion
     }
