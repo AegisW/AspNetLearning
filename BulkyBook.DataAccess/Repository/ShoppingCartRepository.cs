@@ -12,19 +12,22 @@ namespace BulkyBook.DataAccess.Repository
     {
         private readonly ApplicationDbContext _db;
 
+
         public ShoppingCartRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public int DecrementCount(ShoppingCart shoppingCart, int count)
+        public int DecrementCount(int shoppingCartId, int count)
         {
+            var shoppingCart = _db.ShoppingCarts.FirstOrDefault(x => x.Id == shoppingCartId);
             shoppingCart.Count -= count;
             return shoppingCart.Count;
         }
 
-        public int IncrememtCount(ShoppingCart shoppingCart, int count)
+        public int IncrememtCount(int shoppingCartId, int count)
         {
+            var shoppingCart = _db.ShoppingCarts.FirstOrDefault(x => x.Id == shoppingCartId);
             shoppingCart.Count += count;
             return shoppingCart.Count;
         }
