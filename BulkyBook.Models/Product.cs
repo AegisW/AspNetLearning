@@ -36,8 +36,6 @@ namespace BulkyBook.Models
         [Range(1, 10000)]
         [Display(Name = "Price for 100+")]
         public double Price100 { get; set; }
-        [ValidateNever]
-        public string ImageUrl { get; set; }
         [Required]
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
@@ -48,5 +46,7 @@ namespace BulkyBook.Models
         public int CoverTypeId { get; set; }
         [ValidateNever]
         public CoverType CoverType { get; set; }
+        [ValidateNever]
+        public List<ProductImage> ProductImages { get; set; }
     }
 }

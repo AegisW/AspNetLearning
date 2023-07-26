@@ -2,7 +2,6 @@
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
     <input asp-for="Product.Id" hidden />
-    <input asp-for="Product.ImageUrl" hidden />
 
     <div class="row">
         <div class="col-10">
@@ -53,8 +52,8 @@
                     <span asp-validation-for="Product.Price100" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Product.ImageUrl"></label>
-                    <input type="file" id="uploadBox" class="form-control" name="file" />
+                    <label asp-for="Product.ProductImages"></label>
+                    <input type="file" id="uploadBox" class="form-control" name="files" multiple />
                 </div>
                 <div class="mb-3 col-6">
                     <label asp-for="Product.CategoryId"></label>
@@ -86,7 +85,15 @@
             </div>
         </div>
         <div class="col-2 pt-4">
-            <img src="@Model.Product.ImageUrl" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9" />
+            @if(Model.Product.ProductImages != null)
+            {
+                foreach(var image in Model.Product.ProductImages)
+                {
+                    <div class="border p-1 m-2 text-center">
+                        <img src="@image.ImageUrl" width="100%" style="border-radius: 5px; border: 1px solid #bbb9b9" />
+                    </div>
+                }
+            }
         </div>
     </div>
 </form>
@@ -99,7 +106,7 @@
     <script>
         tinymce.init({
           selector: 'textarea',
-          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
           toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
           tinycomments_mode: 'embedded',
           tinycomments_author: 'Author name',
