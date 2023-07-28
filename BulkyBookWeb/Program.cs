@@ -30,6 +30,11 @@ builder.Services.AddAuthentication().AddFacebook(options =>
     options.AppId = builder.Configuration.GetValue<string>("Facebook:AppId");
     options.AppSecret = builder.Configuration.GetValue<string>("Facebook:AppSecret");
 });
+builder.Services.AddAuthentication().AddMicrosoftAccount(options =>
+{
+    options.ClientId = builder.Configuration.GetValue<string>("Microsoft:ClientId");
+    options.ClientSecret = builder.Configuration.GetValue<string>("Microsoft:ClientSecret");
+});
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/Identity/Account/Login";
