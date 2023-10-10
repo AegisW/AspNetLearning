@@ -1,9 +1,4 @@
 ﻿using BulkyBook.DataAccess.Repository.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BulkyBook.DataAccess.Repository
 {
@@ -18,11 +13,12 @@ namespace BulkyBook.DataAccess.Repository
             CoverType = new CoverTypeRepository(_db);
             Product = new ProductRepository(_db);
             ProductImage = new ProductImageRepository(_db);
-            Company= new CompanyRepository(_db);
+            Company = new CompanyRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             ShoppingCart = new ShoppingCartRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
+            Referral = new ReferralRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -34,6 +30,7 @@ namespace BulkyBook.DataAccess.Repository
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
         public IProductImageRepository ProductImage { get; private set; }
+        public IReferralRepository Referral { get; private set; }
 
         public void Save()
         {
