@@ -30,8 +30,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/AegisW/ReferralManagementSystem">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/AegisW/AspNetLearning">
+    <!--<img src="images/logo.png" alt="Logo" width="80" height="80">-->
   </a>
 
 <h3 align="center">Referral Management System</h3>
@@ -39,14 +39,14 @@
   <p align="center">
     Referral Management System (RMS) is an asp.net based web application for easy management of business referrals.
     <br />
-    <a href="https://github.com/AegisW/ReferralManagementSystem/blob/master/README.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/AegisW/AspNetLearning/blob/master/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <!--<a href="https://github.com/AegisW/ReferralManagementSystem">View Demo</a>
+    <!--<a href="https://github.com/AegisW/AspNetLearning">View Demo</a>
     ·-->
-    <a href="https://github.com/AegisW/ReferralManagementSystem/issues">Report Bug</a>
+    <a href="https://github.com/AegisW/AspNetLearning/issues">Report Bug</a>
     ·
-    <a href="https://github.com/AegisW/ReferralManagementSystem/issues">Request Feature</a>
+    <a href="https://github.com/AegisW/AspNetLearning/issues">Request Feature</a>
   </p>
 </div>
 
@@ -132,15 +132,17 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] User related features
-	- [ ] Login
-	- [ ] Create new user account
-	- [ ] Delete existing user account
-- [ ] Referral related features
-	- [ ] Create new referral data
-	- [ ] Update existing referral data
-	- [ ] Display existing referral data
-	- [ ] Delete existing referral data
+- [x] User related features
+	- [x] Login
+	- [x] Create new user account
+	- [x] Delete existing user account
+- [x] Referral related features
+	- [x] Create new referral data
+	- [x] Update existing referral data
+	- [x] Display existing referral data
+	- [x] Delete existing referral data
+ - [ ] Beautify login page
+ - [ ] Beautify referral page
 
 See the [open issues](https://github.com/AegisW/ReferralManagementSystem/issues) for a full list of proposed features (and known issues).
 
