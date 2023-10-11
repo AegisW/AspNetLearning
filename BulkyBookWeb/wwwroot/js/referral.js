@@ -26,9 +26,9 @@ function loadDataTable() {
                     return `
                         <div class="w-150 btn-group" role="group">
                             <a href="/Admin/Referral/Upsert?id=${data}"
-                            class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> &nbsp; Edit</a>
+                            class="btn btn-primary mx-1"><i class="bi bi-pencil-square"></i></a>
                             <a onClick=Delete('/Admin/Referral/Delete/${data}')
-                            class="btn btn-danger mx-2"><i class="bi bi-x-square"></i> &nbsp; Delete</a>
+                            class="btn btn-danger mx-1"><i class="bi bi-x-square"></i></a>
                         </div>
                         `
                 },
