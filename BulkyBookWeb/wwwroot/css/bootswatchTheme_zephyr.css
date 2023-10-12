@@ -12281,3 +12281,21 @@ thead th {
 .modal-content {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
