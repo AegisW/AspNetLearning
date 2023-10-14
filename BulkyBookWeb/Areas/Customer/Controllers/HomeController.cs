@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.Models;
+using BulkyBook.Models.ViewModels;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +24,11 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType,ProductImages");
+            SummaryVM summaryVM = new SummaryVM();
+            summaryVM.ReferralList = _unitOfWork.Referral.GetAll();
+            //IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType,ProductImages");
 
-            return View(productList);
+            return View(summaryVM);
         }
 
         public IActionResult Details(int productId)

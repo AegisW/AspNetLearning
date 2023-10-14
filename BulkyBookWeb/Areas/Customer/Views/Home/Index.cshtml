@@ -1,9 +1,78 @@
-﻿@model IEnumerable<Product> 
+﻿@model SummaryVM 
 @{
     ViewData["Title"] = "Welcome";
 }
 
-<div class="row pd-3">
+<div class="container p-3">
+    <div class="row m-3">
+        <div class="col-12 pb-2">
+            <h2>Referrals Summary</h2>
+        </div>
+        
+        <div class="col-md-6 col-lg-2 my-3 text-center">
+            <div class="card">
+                <div class="text-bg-primary" style="border-top-left-radius:5px; border-top-right-radius:5px;">
+                    Total Refs
+                </div>
+                <div class="card-body">
+                    @Model.ReferralList.Count()
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2 my-3 text-center">
+            <div class="card">
+                <div class="bg-primary text-white" style="border-top-left-radius:5px; border-top-right-radius:5px;">
+                    Open
+                </div>
+                <div class="card-body">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2 my-3 text-center">
+            <div class="card">
+                <div class="bg-primary text-white" style="border-top-left-radius:5px; border-top-right-radius:5px;">
+                    Lost
+                </div>
+                <div class="card-body">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2 my-3 text-center">
+            <div class="card">
+                <div class="bg-primary text-white" style="border-top-left-radius:5px; border-top-right-radius:5px;">
+                    Progressing
+                </div>
+                <div class="card-body">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2 my-3 text-center">
+            <div class="card">
+                <div class="bg-primary text-white" style="border-top-left-radius:5px; border-top-right-radius:5px;">
+                    Settled
+                </div>
+                <div class="card-body">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-2 my-3 text-center">
+            <div class="card">
+                <div class="bg-primary text-white" style="border-top-left-radius:5px; border-top-right-radius:5px;">
+                    Merited
+                </div>
+                <div class="card-body">
+                    0
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="row pd-3">
     @foreach(var product in Model)
     {
         <div class="col-lg-3 col-md-6">
@@ -42,4 +111,4 @@
             </div>
         </div>
     }
-</div>
+</div>*@
